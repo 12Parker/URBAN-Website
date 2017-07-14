@@ -1,0 +1,364 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"bo",
+				"border-box"
+			],
+			[
+				"table",
+				"table-cell"
+			],
+			[
+				"Main",
+				"Maidenhair"
+			],
+			[
+				"A",
+				"asymmetricalBottom"
+			],
+			[
+				"Symmetric",
+				"symmetricalBottom"
+			],
+			[
+				"Color",
+				"ColoradoSpruce"
+			],
+			[
+				"m",
+				"multipleNeedles"
+			],
+			[
+				"D",
+				"DichotomousWebsite"
+			],
+			[
+				"Dich",
+				"DichotomousWebsite"
+			],
+			[
+				"box",
+				"box-sizing"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"list-style",
+				"list-style-type"
+			],
+			[
+				"link",
+				"linkOne"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"inli",
+				"inline-block"
+			],
+			[
+				"text-",
+				"text-align"
+			],
+			[
+				"backgroun",
+				"background-color"
+			],
+			[
+				"in",
+				"input\tTag"
+			],
+			[
+				"l",
+				"label\tTag"
+			],
+			[
+				"L",
+				"LABEL\tTag"
+			],
+			[
+				"col",
+				"col-sm-6"
+			],
+			[
+				"container",
+				"container-fluid"
+			],
+			[
+				"nav",
+				"nav-tabs"
+			],
+			[
+				"align",
+				"align-items"
+			],
+			[
+				"dropdown",
+				"dropdown-menu"
+			],
+			[
+				"p",
+				"placeholder\tAttr"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 255.0,
+		"last_filter": "Snippet: ",
+		"selected_items":
+		[
+			[
+				"Snippet: ",
+				"Snippet: Lorem ipsum"
+			]
+		],
+		"width": 980.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/cam_p/Desktop/UrbanWebsite/UrbanWebsite"
+	],
+	"file_history":
+	[
+		"/C/Users/cam_p/Desktop/UrbanWebsite/UrbanWebsite/validate.js",
+		"/C/Users/cam_p/Desktop/UrbanWebsite/UrbanWebsite/upload.php",
+		"/C/Users/cam_p/Desktop/UrbanWebsite/UrbanWebsite/submit.php",
+		"/C/Users/cam_p/Desktop/UrbanWebsite/UrbanWebsite/listErrors.js",
+		"/C/Users/cam_p/Desktop/UrbanWebsite/UrbanWebsite/index.php",
+		"/C/Users/cam_p/Desktop/UrbanWebsite/UrbanWebsite/getXML.php",
+		"/C/Users/cam_p/Desktop/UrbanWebsite/UrbanWebsite/credentials.php",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/.htaccess",
+		"/C/Users/cam_p/AppData/Local/Temp/scp42173/Urban/credentials.php",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/compound/pinnate/smooth/alternate/alternate.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/compound/pinnate/smooth/opposite/opposite.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/index.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/compound/compound.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/compound/pinnate/pinnate.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/compound/pinnate/smooth/smooth.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/compound/pinnate/serrated/serrated.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/compound/palmate/palmate.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/coniferous/coniferous.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/coniferous/scale/scale.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/coniferous/needle/needle.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/coniferous/needle/twoRows/twoRows.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/coniferous/needle/aroundStem/aroundStem.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/coniferous/needle/aroundStem/singleNeedles/singleNeedle.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/coniferous/needle/aroundStem/multipleNeedles/multipleNeedles.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/coniferous/needle/aroundStem/multipleNeedles/greaterThanFive/greaterThanFive.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/coniferous/needle/aroundStem/multipleNeedles/bunchesOfTwo/bunchesOfTwo.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/coniferous/needle/aroundStem/multipleNeedles/bunchesOfFive/bunchesOfFive.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/main.css",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/wikiLink.js",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/simple/maple/deepLobes/deepLobes.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/simple/maple/maple.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/simple/oak/oak.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/simple/other/asymmetricalBottom/asymmetricalBottom.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/simple/other/symmetricalBottom/pointedTop/pointedTop.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/simple/other/symmetricalBottom/symmetricalBottom.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/simple/other/other.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/simple/simple.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/deciduous.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/simple/maple/shallowLobes/shallowLobes.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/deciduous/simple/other/symmetricalBottom/roundedTop/roundedTop.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/coniferous/needle/aroundStem/multipleNeedles/greaterThanFive.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/coniferous/needle/aroundStem/multipleNeedles/bunchesOfTwo.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/coniferous/needle/aroundStem/multipleNeedles/bunchesOfFive.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/coniferous.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/coniferous/conifer.html",
+		"/C/Users/cam_p/Documents/CongoSpace/html/product.css",
+		"/C/Users/cam_p/Documents/CongoSpace/html/product-page.html",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/main.css.txt",
+		"/C/Users/cam_p/OneDrive/Documents/DichotomousWebsite/index.php",
+		"/C/Users/cam_p/Documents/CongoSpace/html/main.html",
+		"/C/Users/cam_p/Documents/CongoSpace/html/main.css",
+		"/C/Users/cam_p/Documents/CongoSpace/html/about.html",
+		"/C/Users/cam_p/Documents/CongoSpace/html/about.css",
+		"/C/Users/cam_p/Documents/CongoSpace/html/contact.css",
+		"/C/Users/cam_p/Documents/CongoSpace/html/contact.html",
+		"/C/Users/cam_p/Documents/Lab09.txt",
+		"/C/Users/cam_p/Documents/CongoSpace/TheCongo.sublime-project",
+		"/C/Users/cam_p/Documents/PHP_Functions.txt",
+		"/C/Users/cam_p/Documents/websiteTests/JavaScript-onchange.html",
+		"/C/Users/cam_p/Documents/websiteTests/JavaScript-onclick.html",
+		"/C/Users/cam_p/Documents/finalExam.zip",
+		"/C/Users/cam_p/Documents/websiteTests/JavaScript-Test2.html",
+		"/C/Users/cam_p/AppData/Roaming/Sublime Text 3/Packages/User/boilerplate.sublime-snippet",
+		"/C/Users/cam_p/AppData/Roaming/Sublime Text 3/Packages/User/htmlboiler.sublime-snippet",
+		"/C/Users/cam_p/Documents/CongoSpace/html/source.html",
+		"/C/Users/cam_p/Documents/Lab08.php",
+		"/C/Users/cam_p/Documents/4IT3_Lab07.html",
+		"/C/Users/cam_p/Documents/4IT3_Lab07.php",
+		"/C/Users/cam_p/Documents/phpHello.html",
+		"/C/Users/cam_p/Documents/tt.php",
+		"/C/Users/cam_p/Documents/4IT3_Lab08.html",
+		"/C/Users/cam_p/Documents/CongoSpace/html/signIn.js",
+		"/C/Users/cam_p/Documents/CongoSpace/html/signIn.css",
+		"/C/Users/cam_p/Documents/CongoSpace/html/signIn.html",
+		"/C/Users/cam_p/Documents/CongoSpace/html/signup.css",
+		"/C/Users/cam_p/Documents/CongoSpace/html/signup.html",
+		"/C/Users/cam_p/Documents/CongoSpace/html/orders.html",
+		"/C/Users/cam_p/Documents/CongoSpace/html/account.html",
+		"/C/Users/cam_p/AppData/Roaming/Sublime Text 3/Packages/User/Chrome.sublime-build"
+	],
+	"find":
+	{
+		"height": 43.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"link",
+			"linkOne",
+			"clear",
+			"%;\n",
+			"pic",
+			"stlye",
+			";\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"linkOne",
+			"link"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 43.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/User/Chrome.sublime-build",
+	"project": "Urban.sublime-project",
+	"replace":
+	{
+		"height": 82.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 557.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

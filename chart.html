@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src = "node_modules/chart.js/dist/Chart.js"></script>
+	<title>Chart Examples</title>
+</head>
+<body>
+<canvas id="mycanvas" width="400" height="400"></canvas>
+<script>
+$(document).ready(function(){
+	$.ajax({
+		url : "getChartData.php",
+		type : "GET",
+		success : function(data){
+
+			var siteID = [];
+			var chlorophyllData = [];
+
+			for(var i in data) {
+				siteID.push("Site ID " + data[i].SiteID);
+				chlorophyllData.push(data[i].Chlorophyll);
+			}
+			console.log(siteID);
+			console.log(chlorophyllData);
+			var chartdata = {
+				labels: siteID,
+				datasets: [
+					{
+						label: "Chlorophyll",
+						fill: false,
+						lineTension: 0.1,
+						backgroundColor: "rgba(59, 89, 152, 0.75)",
+						borderColor: "rgba(59, 89, 152, 1)",
+						pointHoverBackgroundColor: "rgba(59, 89, 152, 1)",
+						pointHoverBorderColor: "rgba(59, 89, 152, 1)",
+						data: chlorophyllData
+					}
+				]
+			};
+
+			var ctx = $("#mycanvas");
+
+			var LineGraph = new Chart(ctx, {
+				type: 'bar',
+				data: chartdata
+			});
+		},
+		error : function(data) {
+
+		}
+	});
+});
+</script>
+</body>
+</html>
