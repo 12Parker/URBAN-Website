@@ -1,0 +1,177 @@
+<!DOCTYPE html >
+  <head>
+    <!-- <script src="infobox/infobox.js" type="text/javascript"></script> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link href = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js">
+    <link href = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src = "../node_modules/chart.js/dist/Chart.min.js"></script>
+    <script src = "../js/avgChlChart.js"></script>
+
+    <title>URBAN Site Data</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+       #desc {
+        font-size: 14px;
+        color: black;
+        height: 400px;
+        width: 600px;
+       }
+       #desc > strong {
+        text-decoration: underline;
+       }
+      #map {
+        height: 100%;
+      }
+      /* Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Create div to hold map -->
+    <div id="map"></div>
+
+    <script>
+      //Assign letters to each site. The letters show up on the map markers.
+      var customLabel = {
+        'Spencer Creek': {
+          label: 'M'
+        },
+        'Sulphur Creek': {
+          label: 'B'
+        },
+        'Pottruff Spring': {
+          label: 'P'
+        },
+        'Felker Creek': {
+          label: 'F'
+        },
+        'Tiffany Creek': {
+          label: 'T'
+        },
+        'Ancaster Creek': {
+          label: 'A'
+        },
+        'Medad Tributary': {
+          label: 'M'
+        },
+        'Shoreacres Creek': {
+          label: 'S'
+        },
+        'Grindstone Creek': {
+          label: 'G'
+        },
+        'Tuck Creek': {
+          label: ''
+        },
+      };
+
+        //Create the map points 
+        function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: new google.maps.LatLng(43.25799, -79.917996),
+          zoom: 9
+        });
+        var infoWindow = new google.maps.InfoWindow;
+
+          // Change this depending on the name of your PHP or XML file
+          //Retrieves XML data from database
+          //We are looking 
+          downloadUrl('../php/getXML.php', function(data) {
+            var xml = data.responseXML;
+            var markers = xml.documentElement.getElementsByTagName('marker');
+            Array.prototype.forEach.call(markers, function(markerElem) {
+              var id = markerElem.getAttribute('id');
+              var picture = markerElem.getAttribute('picture');
+              var name = markerElem.getAttribute('name');
+              var description = markerElem.getAttribute('description');
+
+              var siteID = markerElem.getAttribute('siteID');
+              var chl = markerElem.getAttribute('chl');
+              var type = markerElem.getAttribute('type');
+              var point = new google.maps.LatLng(
+                  parseFloat(markerElem.getAttribute('lat')),
+                  parseFloat(markerElem.getAttribute('lng')));
+
+              //Create info window content
+              var infowincontent = document.createElement('div');
+              infowincontent.setAttribute("id" , "desc");
+              var strong = document.createElement('strong');
+              strong.textContent = name;
+              infowincontent.appendChild(strong);
+              infowincontent.appendChild(document.createElement('br'));
+
+              //Display description of site
+              var text = document.createElement('p');
+              text.textContent = "Site ID: " + siteID;
+              infowincontent.appendChild(text);
+
+              //Average Chlorophyll for each site
+              var text = document.createElement('p');
+              text.textContent = "CHL: " + chl;
+              infowincontent.appendChild(text);
+
+
+              var canvas = document.createElement('canvas');
+              canvas.id = 'mycanvas';
+              infowincontent.appendChild(canvas);
+
+
+
+              var icon = customLabel[type] || {};
+              var marker = new google.maps.Marker({
+                map: map,
+                position: point,
+                label: icon.label
+              });
+              marker.addListener('click', function() {
+                infoWindow.setContent(infowincontent);
+                infoWindow.open(map, marker);
+              });
+
+              google.maps.event.addListener (infoWindow, 'domready' , function() {
+                  displayChart();
+                });
+            });
+          });
+        }
+        
+
+        //Location Data For Info Window
+        //Site Picture
+        //Site Title
+        //Site Description
+        //Location
+        //Chlorophyll Trends
+
+
+      function downloadUrl(url, callback) {
+        var request = window.ActiveXObject ?
+            new ActiveXObject('Microsoft.XMLHTTP') :
+            new XMLHttpRequest;
+
+        request.onreadystatechange = function() {
+          if (request.readyState == 4) {
+            request.onreadystatechange = doNothing;
+            callback(request, request.status);
+          }
+        };
+
+        request.open('GET', url, true);
+        request.send(null);
+      }
+
+      function doNothing() {}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNee0laDJzZWJWtl7X9LyozO_wUgiyOTc&callback=initMap">
+    </script>
+  </body>
+</html>
