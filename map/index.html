@@ -6,9 +6,9 @@
     <script 
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNee0laDJzZWJWtl7X9LyozO_wUgiyOTc">
     </script>
-    <script  async type="text/javascript" src="//rawgit.com/googlemaps/v3-utility-library/master/infobox/src/infobox.js"></script>
-    <script async src = "../node_modules/chart.js/dist/Chart.min.js"></script>
-    <script async src = "../js/avgChlChart.js"></script>
+    <script  async type="text/javascript" src="../js/infobox.min.js"></script>
+    <script adefer src = "../node_modules/chart.js/dist/Chart.min.js"></script>
+    <script defer src = "../js/monthlyChlChart.js"></script>
   
     <title>URBAN Site Data</title>
     <style>
@@ -21,7 +21,7 @@
         height: 250px;
         width: 300px;
         overflow-y: scroll;
-        overflow-x:;
+        overflow-x: hidden;
         background-color: white;
         border: 1px #F5F5F5;
         /* Add shadows to create the "card" effect */
@@ -73,8 +73,14 @@
       #avgChl {
         text-align: center;
       }
-      #mycanvas {
+      #chartContainer {
+        position: relative;
         margin: 10px;
+      }
+      #myChart {
+        margin: 5px;
+        width: 100%;
+        height: 100%;
       }
       #map {
         height: 100%;
@@ -125,8 +131,10 @@
     //Create the map points  
     function initialize() {
       var map = new google.maps.Map(document.getElementById('map'), {
-      center: new google.maps.LatLng(43.25799, -79.917996),
-      zoom: 9
+      center: new google.maps.LatLng(43.25799, -79.917996)
+      ,zoom: 9
+      ,scrollwheel: false
+      ,gestureHandling: 'cooperative'
       });
 
       //var infoWindow = new google.maps.InfoWindow;
@@ -169,6 +177,7 @@
           //Create info window containing div
           var infowincontent = document.createElement('div');
           infowincontent.setAttribute("id" , "desc");
+          infowincontent.setAttribute("class" , siteID);
 
           //Site Pictures
           var pic = document.createElement('img');
@@ -196,13 +205,18 @@
           //Average Chlorophyll for each site
           var text = document.createElement('p');
           text.id = "avgChl";
-          text.textContent = "Average CHL: " + chl;
+          text.textContent = "Total Average CHL: " + chl;
           infowincontent.appendChild(text);
+
+          //Div to hold canvas
+          var chartContainer = document.createElement('div');
+          chartContainer.id = "chartContainer";
+          infowincontent.appendChild(chartContainer);
 
           //Canvas for Chlorophyll Graph
           var canvas = document.createElement('canvas');
-          canvas.id = 'mycanvas';
-          infowincontent.appendChild(canvas);
+          canvas.id = 'myChart';
+          chartContainer.appendChild(canvas);
 
           var icon = customLabel[type] || {};
           var marker = new google.maps.Marker({
@@ -224,20 +238,24 @@
       //When the infowindow is loaded, display the chart. *Stops chart from loading multiple times
       google.maps.event.addListener (infoWindow, 'domready' ,function() 
       {
-        displayChart();
+        var siteName = document.getElementById('desc').getAttribute('class');
+        console.log(siteName);
+        displayChart(siteName); //send siteID so we can generate specific chart data for each site
+        var chart = document.getElementById('myChart');
+        var chartDiv = document.getElementById('chartContainer');
+        chart.width = chartDiv.clientWidth;
+        chart.height = chartDiv.clientHeight;
+        var infoWin = document.getElementById('desc');
+        infoWin.focus();
       });
 
       //Close the info window when user clicks on map *Replaces close button
       google.maps.event.addListener(map, 'click', function() {
         infoWindow.close();
       });
-
-      google.maps.event.addListener(infoWindow, 'click' ,function() {
-        alert("hi");
-      });
-
     } 
 
+    //function needed for XML request
     function downloadUrl(url, callback) {
       var request = window.ActiveXObject ?
       new ActiveXObject('Microsoft.XMLHTTP') :
@@ -255,7 +273,6 @@
 
     function doNothing() {}
   </script>
-
   <body onload = "initialize();">
     <!-- Create div to hold map -->
     <div id="map"></div>

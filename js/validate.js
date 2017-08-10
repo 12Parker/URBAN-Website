@@ -42,7 +42,10 @@ function validate($siteIDError)
     }
 
     var siteID = document.getElementById( "input-siteID" );
-    if( siteID.value.length < 5 || siteID.value.length > 5)
+    var siteCheck = false;
+    siteCheck = Number.isInteger(siteID);
+
+    if(siteID.value.length < 5 || siteID.value.length > 5 || !(siteCheck))
     {
         console.log("SiteID Error");
         error = "Please Enter Your 5-digit Site ID";
@@ -81,7 +84,7 @@ function validate($siteIDError)
     else if (dateDeployed.value > dateCollected.value) 
     {
         console.log("Date Collected Error");
-        error = "Date Collected Must Be Greater Than Date Delopyed";
+        error = "Date Collected Must Be Greater Than Date Deployed";
         errors.push(error); 
     }
 
@@ -126,6 +129,8 @@ function validate($siteIDError)
             var add = ulist.appendChild(err);
             list.appendChild(add);
         }
+        //Scroll to top of page so user can see the errors
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
         return false;
     } 
     else

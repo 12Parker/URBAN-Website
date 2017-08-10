@@ -1,5 +1,5 @@
 <?php
-  	//Variables
+  	//Database Credentials
   	$dbase = 'db690177581';
   	$dbuser = 'dbo690177581';
   	$dbpass = 'EcologyLab';

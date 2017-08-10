@@ -1,16 +1,21 @@
-function displayChart() 
+function displayChart(siteVar) 
 {
+	siteName = siteVar;
 $(document).ready(function(){
+	site = siteName;
 	$.ajax({
-		url : "https://mcmastertreeid.ca/Urban/php/getChartData.php",
+		url : "https://mcmastertreeid.ca/Urban/php/getMonthlyData.php",
 		type : "GET",
+		data : {
+			siteName: site
+		},
 		success : function(data){
 
 			var siteID = [];
 			var chlorophyllData = [];
 
 			for(var i in data) {
-				siteID.push(data[i].Stream);
+				siteID.push(data[i].Month);
 				chlorophyllData.push(data[i].Chlorophyll);
 			}
 			//console.log(siteID);
@@ -34,16 +39,16 @@ $(document).ready(function(){
 			var ctx = document.getElementById("myChart").getContext('2d');
 
 			var myChart = new Chart(ctx, {
-				type: 'bar',
+				type: 'line',
 				data: chartdata,
 				options: {
-				    responsive: true,
+				    responsive: false,
 				    maintainAspectRatio: true,
     				
 					title: {
 						display: true,
 						fontSize: 12,
-						text: 'Average Site Chlorophyll Values'
+						text: 'Average Monthly Chl Values'
 					},
 					legend: {
 						display: false

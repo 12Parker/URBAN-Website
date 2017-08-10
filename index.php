@@ -1,25 +1,13 @@
-<!-- https redirect
-<?php
-// Require https
-if ($_SERVER['HTTPS'] != "on") {
-    $url = "https://". $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-    header("Location: $url");
-    exit;
-} 
-?>
-
--->
-<!-- Developed by Cameron Parker - 2017 -->
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel = "stylesheet" type = "text/css" href = "stylesheets/main.css">
+    <link rel = "stylesheet" type = "text/css" href = "Stylesheet/main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src = "js/validate.js"></script>
-    <script src = "js/listErrors.js"></script>
-    <script src = "js/avgChlChart.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
     <script src = "node_modules/chart.js/dist/Chart.min.js"></script>
+    <script async src = "js/validate.js"></script>
+    <script async src = "js/listErrors.js"></script>
+    <script src = "js/avgChlChart.js"></script>
 
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 
@@ -68,7 +56,9 @@ if ($_SERVER['HTTPS'] != "on") {
         	err.appendChild(document.createTextNode(error));
         	var add = ulist.appendChild(err);
         	list.appendChild(add);
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
       }
+      //Displays a list of all valid URBAN sites
       function displaySiteList() 
       {
         var xmlhttp = new XMLHttpRequest();
@@ -82,6 +72,7 @@ if ($_SERVER['HTTPS'] != "on") {
         xmlhttp.open("GET","php/getSite.php",true);
         xmlhttp.send();
       }
+      //Deletes a div from the screen. Mainly used for removing list of site ID's
       function removeDiv(parent, child) 
       {
         var parentNode = document.getElementById(parent);
@@ -94,17 +85,12 @@ if ($_SERVER['HTTPS'] != "on") {
   <body>
     <?php
       require("php/credentials.php");
-    	//Variables
-    	//$dbase = 'db690177581';
-    	//$dbuser = 'dbo690177581';
-    	//$dbpass = 'EcologyLab';
-    	//$link = mysqli_connect("db690177581.db.1and1.com", $dbuser, $dbpass, $dbase );
       $link = mysqli_connect($host, $username, $password, $database);
 
   	 if (!$link)
   	 { //Print error message
-      	echo "Error: Unable to connect to MySQL." . PHP_EOL;
-      	echo "Debugging err number: " . mysqli_connect_errno() . PHP_EOL;
+      	echo "Error: Unable to connect to website" . PHP_EOL;
+      	//echo "Debugging err number: " . mysqli_connect_errno() . PHP_EOL;
       	exit;
   	 }
 
@@ -156,7 +142,7 @@ if ($_SERVER['HTTPS'] != "on") {
 
           <label for "habitat">Habitat Rod Was Located In</label>
           <select required title = "Habitat Rod Was Located In" name = "habitat" id = "input-habitat"  onChange = 'toggleDisabled("input-habitat" , "input-notes" , "" , "other")'>
-          	<option disabled selected hidden value = "">Habitat Rod Was Located In</option>
+          	<option disabled selected hidden value = "">Habitat</option>
           	<option value = "thalweg">Thalweg</option>
           	<option value = "riffle">Riffle</option>
           	<option value = "pool">Pool</option>
@@ -177,7 +163,7 @@ if ($_SERVER['HTTPS'] != "on") {
 
         </div>
         <div id = "info">
-        </div>
+        </div> <br />
           <div id = "stats">
             <?php
             //Code to print out a chart of average chlorophyll values
@@ -186,25 +172,28 @@ if ($_SERVER['HTTPS'] != "on") {
                 $siteID = $_POST['siteID'];
                 $blueValue = $_POST['blueValue'];
               
-              if ($_POST['submit'] != null) 
-              {
-                //Calculate Users Chlorophyll Value
-                $chl = (81.181645 - (1.4625132 * $blueValue)) + (0.032159 * POW(($blueValue - 43.6545),2));
-                echo "Your Chlorophyll Value is: " . round($chl,4) . "<br />";
+                if ($_POST['submit'] != null) 
+                {
+                  //Calculate Users Chlorophyll Value
+                  $chl = (81.181645 - (1.4625132 * $blueValue)) + (0.032159 * POW(($blueValue - 43.6545),2));
 
-                //Return Average Chlorophyll Value
-                $query = "SELECT Sites.Stream , AVG(UserData.BlueValue) As `Chlorophyll` FROM Sites INNER JOIN UserData ON Sites.SiteID = UserData.SiteID WHERE Sites.SiteID = $siteID GROUP BY Sites.Stream;";
-                $result = mysqli_query($link, $query);
-                $row = @mysqli_fetch_assoc($result);
-                echo "Average Chlorophyll Value is: " . round($row['Chlorophyll'], 4);
-                ?>
-                <canvas id="mycanvas" width="200" height="200"></canvas>
-                <script>displayChart();</script>
-                <?php
-              }
+                  //Return Average Chlorophyll Value
+                  $query = "SELECT Sites.Stream , AVG(UserData.BlueValue) As `Chlorophyll` FROM Sites INNER JOIN UserData ON Sites.SiteID = UserData.SiteID WHERE Sites.SiteID = $siteID GROUP BY Sites.Stream;";
+                  $result = mysqli_query($link, $query);
+                  $row = @mysqli_fetch_assoc($result);
+
+                  //Print the results
+                  echo "Your Chlorophyll Value is: " . round($chl,4) . "<br />";
+                  echo "Average Chlorophyll Value is: " . round($row['Chlorophyll'], 4);
+                  ?>
+                  <div width="100%" height="600px">
+                  <canvas id="myChart"></canvas>
+                  </div>
+                  <script>displayChart();</script>
+                  <?php
+                }
               }
             ?>
-            <!--Chlorophyll Chart -->
           </div>
         <input name = "submit" type="submit" value="Submit" id="input-submit">
       </form>
@@ -213,12 +202,11 @@ if ($_SERVER['HTTPS'] != "on") {
     <div id = "goToMap">
       <a href = "map" class = "button">Go To Map</a>
     </div>
-
-  <?php
+    <?php
   //Upload to a database
   if ($_POST != null) 
   {
-    //Variables
+    //Sanitize the inputs
     $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
     $affiliation = filter_var($_POST['affiliation'] , FILTER_SANITIZE_STRING);
     $email = filter_var($_POST['email'] ,FILTER_SANITIZE_EMAIL);
@@ -236,54 +224,65 @@ if ($_SERVER['HTTPS'] != "on") {
     
     if ($_POST['submit'] != null) 
     {
-    	$check = false;
+      $check = false;
       //Chlorophyll calculation using Nix sensor's blue value
-    	$sum = (81.181645 - (1.4625132 * $blueValue)) + (0.032159 * POW(($blueValue - 43.6545),2));
+      $sum = (81.181645 - (1.4625132 * $blueValue)) + (0.032159 * POW(($blueValue - 43.6545),2));
+      //Save the calculation as a POST variable to store in database
       $_POST['Chlorophyll'] = $sum;
 
-    	if ($siteID != null || $siteID != "")
-    	{
-    		$query = "SELECT * FROM `Sites` WHERE siteID = $siteID";
-    		$results = mysqli_query($link, $query);
+      if ($siteID != null || $siteID != "")
+      {
+        //If a site exists then we can submit the data
+        $query = "SELECT * FROM `Sites` WHERE siteID = $siteID";
+        $results = mysqli_query($link, $query);
 
-    		if ($results->num_rows <= 0) 
-    		{
-    			echo "<script>siteError('True');</script";
-    			$check = false;
-    		} else 
+        //If there is no row it means the site doesn't exist
+        if ($results->num_rows <= 0) 
         {
-    			$check = true;
-    		}
-    	}
+          echo "<script>siteError('True');</script>";
+          $check = false;
+        } else 
+        {
+          $check = true;
+        }
+      }
 
-    	if ($lat == null || $lat == "") 
+      //Don't store a null or blank lat/lng. In the database a lat/lng of 0 will be converted using the entered siteID.
+      if ($lat == null || $lat == "") 
       {
-    		$lat = 0;
-    	}
-    	if ($lng == null || $lng == "") 
+        $lat = 0;
+      }
+      if ($lng == null || $lng == "") 
       {
-    		$lng = 0;
-    	}
+        $lng = 0;
+      }
 
-    	if ($check == true) 
-    	{
-  	    $query = "INSERT INTO `UserData` (`Name` , `Email`, `SiteID` , `Notes`,`Affiliation` , `TimeExtracted` , `DateCollected` , `DateDeployed` , `Habitat` , `RodLength` , `BlueValue` , `Chlorophyll`, `Lat` , `Lng` , `SiteDescription`)
-  	    VALUES ('$name', '$email', '$siteID', '$notes' , '$affiliation' , '$timeExtracted' , '$dateCollected' , '$dateDeployed' , '$habitat' , '$rodLength' , '$blueValue', '$sum' , '$lat' , '$lng' , '$siteDescription')";
-  	    $result = mysqli_query($link, $query);
-  	  	if (!$result) 
-  	  	{
-  	      //echo "Error: Unable to query database." . PHP_EOL;
-  	      //echo "Debugging errno: " . mysqli_error($link) . PHP_EOL;
-  	      $message = "Sorry, we were unable to upload your data.";
-  	      echo "<script type='text/javascript'>alert('$message');</script>";
-  	      exit;
-  	  	} else 
-  	  	{
-  	      $message = "Thank you! We will look over your submission and add it to our database.";
-  	      echo "<script type='text/javascript'>alert('$message');</script>";
-  	  	}
-  		}
-  	}
+      if ($check == true) 
+      {
+        //Insert the values into the database.
+        $query = "INSERT INTO `UserData` (`Name` , `Email`, `SiteID` , `Notes`,`Affiliation` , `TimeExtracted` , `DateCollected` , `DateDeployed` , `Habitat` , `RodLength` , `BlueValue` , `Chlorophyll`, `Lat` , `Lng` , `SiteDescription`)
+        VALUES ('$name', '$email', '$siteID', '$notes' , '$affiliation' , '$timeExtracted' , '$dateCollected' , '$dateDeployed' , '$habitat' , '$rodLength' , '$blueValue', '$sum' , '$lat' , '$lng' , '$siteDescription')";
+        $result = mysqli_query($link, $query);
+        if (!$result) 
+        {
+          //echo "Error: Unable to query database." . PHP_EOL;
+          //echo "Debugging errno: " . mysqli_error($link) . PHP_EOL;
+          $message = "Sorry, we were unable to upload your data.";
+          echo "<script type='text/javascript'>alert('$message');</script>";
+          echo "<script>document.body.scrollTop = document.documentElement.scrollTop = 0;</script>";
+          exit;
+        } else 
+        {
+          $message = "Thank you! We will look over your submission and add it to our database.";
+          echo "<script type='text/javascript'>alert('$message');</script>";
+        }
+      } else {
+          $message = "Sorry, we were unable to upload your data.";
+          echo "<script type='text/javascript'>alert('$message');</script>";
+          echo "<script>document.body.scrollTop = document.documentElement.scrollTop = 0;</script>";
+        exit;
+      }
+    }
     /* //Prints out the results from a SQL query.
     while ($row = mysqli_fetch_assoc($result)) {
      echo $row['Name'] . ' ' . $row['Email'] . ' ' . $row['Site ID'] . ' ' . $row['notes'] .'<br />';
@@ -291,7 +290,6 @@ if ($_SERVER['HTTPS'] != "on") {
   }
   mysqli_close($link); //close the connection
   ?>
-
   </body>
 
   <div align = "center" id = "footer">

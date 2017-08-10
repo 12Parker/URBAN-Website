@@ -19,7 +19,7 @@
   }
 
   // Select all the rows in the markers table
-  $query = "SELECT Sites.Lat, Sites.Lng, Sites.SiteID, Sites.Stream, AVG(UserData.Chlorophyll) AS 'Chlorophyll' FROM Sites
+  $query = "SELECT Sites.Lat, Sites.Lng, Sites.SiteID, Sites.Stream, AVG(UserData.Chlorophyll) AS 'Chlorophyll' , Sites.ReportCards , Sites.Pictures FROM Sites
   JOIN UserData on Sites.SiteID = UserData.SiteID
   GROUP BY Sites.SiteID;";
 
@@ -39,12 +39,13 @@
   {
     // Add to XML document node
     echo '<marker ';
-    echo 'id="' . $row['Description'] . '" ';
     echo 'name="' . parseToXML($row['Stream']) . '" ';
     echo 'siteID="' . parseToXML($row['SiteID']) . '" ';
     echo 'lat="' . $row['Lat'] . '" ';
     echo 'lng="' . $row['Lng'] . '" ';
     echo 'chl="' . $row['Chlorophyll'] . '" ';
+    echo 'reportCard="' . $row['ReportCards'] . '" ';
+    echo 'pictures="' . $row['Pictures'] . '" ';
     echo '/>';
   }
 
