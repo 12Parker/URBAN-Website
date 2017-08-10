@@ -14,33 +14,27 @@
     <!--<script src = "node_modules/chart.js/dist/Chart.js"></script>-->
     <script>
       function toggleDisabled(elem1 , elem2 , elem3 , value) {
-      	var element1 = document.getElementById(elem1);
-      	var element2 = document.getElementById(elem2);
-<<<<<<< HEAD
-      	if (elem3 != "") {
-=======
-      	if (elem3 != "") 
-      	{
-          //elem
->>>>>>> d58d969f62b316288f47084a84cd52ce6ee3e9b0
-      		var element3 = document.getElementById(elem3);
-      	}
+        var element1 = document.getElementById(elem1);
+        var element2 = document.getElementById(elem2);
+        if (elem3 != "") {
+          var element3 = document.getElementById(elem3);
+        }
 
-      	if (element1.value === value) {
-      		console.log("toggling on");
-      		element2.disabled = '';
-      		
-      		if (elem3 != "") {
-      			element3.disabled = '';
-      		}
-      	} else {
-      		console.log("toggling off");
-      		element2.disabled = 'true';
+        if (element1.value === value) {
+          console.log("toggling on");
+          element2.disabled = '';
+          
+          if (elem3 != "") {
+            element3.disabled = '';
+          }
+        } else {
+          console.log("toggling off");
+          element2.disabled = 'true';
 
-      		if (elem3 != "") {
-      			element3.disabled = 'true';
-      		}
-      	}
+          if (elem3 != "") {
+            element3.disabled = 'true';
+          }
+        }
       }
     </script>
     <script>
