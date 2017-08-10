@@ -19,6 +19,7 @@
       	var element2 = document.getElementById(elem2);
       	if (elem3 != "") 
       	{
+          //elem
       		var element3 = document.getElementById(elem3);
       	}
 
