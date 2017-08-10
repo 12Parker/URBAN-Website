@@ -13,30 +13,25 @@
 
     <!--<script src = "node_modules/chart.js/dist/Chart.js"></script>-->
     <script>
-      function toggleDisabled(elem1 , elem2 , elem3 , value)
-      {
+      function toggleDisabled(elem1 , elem2 , elem3 , value) {
       	var element1 = document.getElementById(elem1);
       	var element2 = document.getElementById(elem2);
-      	if (elem3 != "") 
-      	{
-          //elem
+      	if (elem3 != "") {
       		var element3 = document.getElementById(elem3);
       	}
 
-      	if (element1.value === value) 
-      	{
+      	if (element1.value === value) {
       		console.log("toggling on");
       		element2.disabled = '';
-      		if (elem3 != "") 
-      		{
+      		
+      		if (elem3 != "") {
       			element3.disabled = '';
       		}
-      	} else 
-      	{
+      	} else {
       		console.log("toggling off");
       		element2.disabled = 'true';
-      		if (elem3 != "") 
-      		{
+
+      		if (elem3 != "") {
       			element3.disabled = 'true';
       		}
       	}
@@ -44,29 +39,27 @@
     </script>
     <script>
       //Function to disable a certain input if another input contains a value.
-      function siteError($siteIDError) 
-      {
+      function siteError($siteIDError) {
       	var list = document.getElementById('errors');
-      	if ($siteIDError == 'True') 
-      	{
+
+      	if ($siteIDError == 'True') {
         	console.log("SiteID Not Valid");
         	error = "Please Enter A Valid Site ID";  
         }
-        	var ulist = document.createElement('ul');
-        	var err = document.createElement('li');
-        	err.appendChild(document.createTextNode(error));
-        	var add = ulist.appendChild(err);
-        	list.appendChild(add);
-          document.body.scrollTop = document.documentElement.scrollTop = 0;
+      	var ulist = document.createElement('ul');
+      	var err = document.createElement('li');
+      	err.appendChild(document.createTextNode(error));
+      	var add = ulist.appendChild(err);
+      	list.appendChild(add);
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
       }
       //Displays a list of all valid URBAN sites
-      function displaySiteList() 
-      {
+      function displaySiteList() {
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() 
-        {
-          if (this.readyState == 4 && this.status == 200) 
-          {
+
+        xmlhttp.onreadystatechange = function() {
+
+          if (this.readyState == 4 && this.status == 200) {
             document.getElementById("info").innerHTML = this.responseText;
           } 
         };
@@ -74,8 +67,7 @@
         xmlhttp.send();
       }
       //Deletes a div from the screen. Mainly used for removing list of site ID's
-      function removeDiv(parent, child) 
-      {
+      function removeDiv(parent, child) {
         var parentNode = document.getElementById(parent);
         var childNode = document.getElementById(child);
         parentNode.removeChild(childNode);
@@ -88,15 +80,14 @@
       require("php/credentials.php");
       $link = mysqli_connect($host, $username, $password, $database);
 
-  	 if (!$link)
-  	 { //Print error message
+  		if (!$link) { //Print error message
       	echo "Error: Unable to connect to website" . PHP_EOL;
       	//echo "Debugging err number: " . mysqli_connect_errno() . PHP_EOL;
       	exit;
-  	 }
+  	 	}
 
-  	 //echo "A proper connection to MySQL was made!" . PHP_EOL;
-  	 //echo "Host information: " . mysqli_get_host_info($link) . PHP_EOL;
+  	 	//echo "A proper connection to MySQL was made!" . PHP_EOL;
+  	 	//echo "Host information: " . mysqli_get_host_info($link) . PHP_EOL;
     ?>
 
     <div id = "header">
@@ -163,18 +154,18 @@
           <input  default = "0" name="lng" type="number" min = "-180" max = "180" id="input-lng" placeholder="Longitude of Site" value = "<?php echo isset($_POST['lng']) ? $_POST['lng'] : '' ?>">
 
         </div>
+
         <div id = "info">
         </div> <br />
+
           <div id = "stats">
-            <?php
-            //Code to print out a chart of average chlorophyll values
-              if ($_POST != null) 
-              {
+            <?php //php01
+            	//Code to print out a chart of average chlorophyll values
+              if ($_POST != null) {
                 $siteID = $_POST['siteID'];
                 $blueValue = $_POST['blueValue'];
               
-                if ($_POST['submit'] != null) 
-                {
+                if ($_POST['submit'] != null) {
                   //Calculate Users Chlorophyll Value
                   $chl = (81.181645 - (1.4625132 * $blueValue)) + (0.032159 * POW(($blueValue - 43.6545),2));
 
@@ -186,15 +177,16 @@
                   //Print the results
                   echo "Your Chlorophyll Value is: " . round($chl,4) . "<br />";
                   echo "Average Chlorophyll Value is: " . round($row['Chlorophyll'], 4);
-                  ?>
+            			?> <!-- php01 -->
+
                   <div width="100%" height="600px">
                   <canvas id="myChart"></canvas>
                   </div>
                   <script>displayChart();</script>
-                  <?php
+                  <?php //php02
                 }
               }
-            ?>
+            ?> <!--  php02 -->
           </div>
         <input name = "submit" type="submit" value="Submit" id="input-submit">
       </form>
@@ -203,93 +195,86 @@
     <div id = "goToMap">
       <a href = "map" class = "button">Go To Map</a>
     </div>
+
     <?php
-  //Upload to a database
-  if ($_POST != null) 
-  {
-    //Sanitize the inputs
-    $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
-    $affiliation = filter_var($_POST['affiliation'] , FILTER_SANITIZE_STRING);
-    $email = filter_var($_POST['email'] ,FILTER_SANITIZE_EMAIL);
-    $siteID = filter_var($_POST['siteID'] , FILTER_VALIDATE_INT);
-    $timeExtracted  = filter_var($_POST['timeExtracted'] , FILTER_VALIDATE_INT) ;
-    $dateDeployed = $_POST['dateDeployed'];
-    $dateCollected  = $_POST['dateCollected'];
-    $habitat = filter_var($_POST['habitat'] , FILTER_SANITIZE_STRING);
-    $rodLength = filter_var($_POST['rodLength'] , FILTER_VALIDATE_INT);
-    $notes = filter_var($_POST['notes'] , FILTER_SANITIZE_STRING);
-    $blueValue = filter_var($_POST['blueValue'] , FILTER_VALIDATE_INT);
-    $lat = filter_var($_POST['lat'] , FILTER_VALIDATE_INT);
-    $lng = filter_var($_POST['lng'] , FILTER_VALIDATE_INT);
-    $siteDescription = filter_var($_POST['siteDescription'] , FILTER_SANITIZE_STRING);
-    
-    if ($_POST['submit'] != null) 
-    {
-      $check = false;
-      //Chlorophyll calculation using Nix sensor's blue value
-      $sum = (81.181645 - (1.4625132 * $blueValue)) + (0.032159 * POW(($blueValue - 43.6545),2));
-      //Save the calculation as a POST variable to store in database
-      $_POST['Chlorophyll'] = $sum;
+  		//Upload to a database
+ 			if ($_POST != null) {
+		    //Sanitize the inputs
+		    $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+		    $affiliation = filter_var($_POST['affiliation'] , FILTER_SANITIZE_STRING);
+		    $email = filter_var($_POST['email'] ,FILTER_SANITIZE_EMAIL);
+		    $siteID = filter_var($_POST['siteID'] , FILTER_VALIDATE_INT);
+		    $timeExtracted  = filter_var($_POST['timeExtracted'] , FILTER_VALIDATE_INT) ;
+		    $dateDeployed = $_POST['dateDeployed'];
+		    $dateCollected  = $_POST['dateCollected'];
+		    $habitat = filter_var($_POST['habitat'] , FILTER_SANITIZE_STRING);
+		    $rodLength = filter_var($_POST['rodLength'] , FILTER_VALIDATE_INT);
+		    $notes = filter_var($_POST['notes'] , FILTER_SANITIZE_STRING);
+		    $blueValue = filter_var($_POST['blueValue'] , FILTER_VALIDATE_INT);
+		    $lat = filter_var($_POST['lat'] , FILTER_VALIDATE_INT);
+		    $lng = filter_var($_POST['lng'] , FILTER_VALIDATE_INT);
+		    $siteDescription = filter_var($_POST['siteDescription'] , FILTER_SANITIZE_STRING);
+		    
+		    if ($_POST['submit'] != null) {
+		      $check = false;
+		      //Chlorophyll calculation using Nix sensor's blue value
+		      $sum = (81.181645 - (1.4625132 * $blueValue)) + (0.032159 * POW(($blueValue - 43.6545),2));
+		      //Save the calculation as a POST variable to store in database
+		      $_POST['Chlorophyll'] = $sum;
 
-      if ($siteID != null || $siteID != "")
-      {
-        //If a site exists then we can submit the data
-        $query = "SELECT * FROM `Sites` WHERE siteID = $siteID";
-        $results = mysqli_query($link, $query);
+		      if ($siteID != null || $siteID != "") {
+		        //If a site exists then we can submit the data
+		        $query = "SELECT * FROM `Sites` WHERE siteID = $siteID";
+		        $results = mysqli_query($link, $query);
 
-        //If there is no row it means the site doesn't exist
-        if ($results->num_rows <= 0) 
-        {
-          echo "<script>siteError('True');</script>";
-          $check = false;
-        } else 
-        {
-          $check = true;
-        }
-      }
+		        //If there is no row it means the site doesn't exist
+		        if ($results->num_rows <= 0) {
+		          echo "<script>siteError('True');</script>";
+		          $check = false;
+		        } else {
+		          $check = true;
+		        }
+		      }
 
-      //Don't store a null or blank lat/lng. In the database a lat/lng of 0 will be converted using the entered siteID.
-      if ($lat == null || $lat == "") 
-      {
-        $lat = 0;
-      }
-      if ($lng == null || $lng == "") 
-      {
-        $lng = 0;
-      }
+		      //Don't store a null or blank lat/lng. In the database a lat/lng of 0 will be converted using the entered siteID.
+		      if ($lat == null || $lat == "") {
+		        $lat = 0;
+		      }
+		      if ($lng == null || $lng == "") {
+		        $lng = 0;
+		      }
 
-      if ($check == true) 
-      {
-        //Insert the values into the database.
-        $query = "INSERT INTO `UserData` (`Name` , `Email`, `SiteID` , `Notes`,`Affiliation` , `TimeExtracted` , `DateCollected` , `DateDeployed` , `Habitat` , `RodLength` , `BlueValue` , `Chlorophyll`, `Lat` , `Lng` , `SiteDescription`)
-        VALUES ('$name', '$email', '$siteID', '$notes' , '$affiliation' , '$timeExtracted' , '$dateCollected' , '$dateDeployed' , '$habitat' , '$rodLength' , '$blueValue', '$sum' , '$lat' , '$lng' , '$siteDescription')";
-        $result = mysqli_query($link, $query);
-        if (!$result) 
-        {
-          //echo "Error: Unable to query database." . PHP_EOL;
-          //echo "Debugging errno: " . mysqli_error($link) . PHP_EOL;
-          $message = "Sorry, we were unable to upload your data.";
-          echo "<script type='text/javascript'>alert('$message');</script>";
-          echo "<script>document.body.scrollTop = document.documentElement.scrollTop = 0;</script>";
-          exit;
-        } else 
-        {
-          $message = "Thank you! We will look over your submission and add it to our database.";
-          echo "<script type='text/javascript'>alert('$message');</script>";
-        }
-      } else {
-          $message = "Sorry, we were unable to upload your data.";
-          echo "<script type='text/javascript'>alert('$message');</script>";
-          echo "<script>document.body.scrollTop = document.documentElement.scrollTop = 0;</script>";
-        exit;
-      }
-    }
-    /* //Prints out the results from a SQL query.
-    while ($row = mysqli_fetch_assoc($result)) {
-     echo $row['Name'] . ' ' . $row['Email'] . ' ' . $row['Site ID'] . ' ' . $row['notes'] .'<br />';
-    } */
-  }
-  mysqli_close($link); //close the connection
+		      if ($check == true) {
+		        //Insert the values into the database.
+		        $query = "INSERT INTO `UserData` (`Name` , `Email`, `SiteID` , `Notes`,`Affiliation` , `TimeExtracted` , `DateCollected` , `DateDeployed` , `Habitat` , `RodLength` , `BlueValue` , `Chlorophyll`, `Lat` , `Lng` , `SiteDescription`)
+		        VALUES ('$name', '$email', '$siteID', '$notes' , '$affiliation' , '$timeExtracted' , '$dateCollected' , '$dateDeployed' , '$habitat' , '$rodLength' , '$blueValue', '$sum' , '$lat' , '$lng' , '$siteDescription')";
+		        $result = mysqli_query($link, $query);
+
+		        if (!$result) {
+		          //echo "Error: Unable to query database." . PHP_EOL;
+		          //echo "Debugging errno: " . mysqli_error($link) . PHP_EOL;
+		          $message = "Sorry, we were unable to upload your data.";
+		          echo "<script type='text/javascript'>alert('$message');</script>";
+		          echo "<script>document.body.scrollTop = document.documentElement.scrollTop = 0;</script>";
+		          exit;
+		        } else {
+		          $message = "Thank you! We will look over your submission and add it to our database.";
+		          echo "<script type='text/javascript'>alert('$message');</script>";
+		        }
+
+		      } else {
+		        $message = "Sorry, we were unable to upload your data. Please check your entries";
+		        echo "<script type='text/javascript'>alert('$message');</script>";
+		        echo "<script>document.body.scrollTop = document.documentElement.scrollTop = 0;</script>";
+		        exit;
+		      }
+		    }
+		    /* //Prints out the results from a SQL query.
+		    while ($row = mysqli_fetch_assoc($result)) {
+		     echo $row['Name'] . ' ' . $row['Email'] . ' ' . $row['Site ID'] . ' ' . $row['notes'] .'<br />';
+		    } */
+		  }
+		  mysqli_close($link); //close the connection
   ?>
   </body>
 
