@@ -1,7 +1,7 @@
 function displayChart(siteVar) 
 {
 	siteName = siteVar;
-$(document).ready(function(){
+$(document).ready(function() {
 	site = siteName;
 	$.ajax({
 		url : "https://mcmastertreeid.ca/Urban/php/getMonthlyData.php",
@@ -9,7 +9,7 @@ $(document).ready(function(){
 		data : {
 			siteName: site
 		},
-		success : function(data){
+		success : function(data) {
 
 			var siteID = [];
 			var chlorophyllData = [];

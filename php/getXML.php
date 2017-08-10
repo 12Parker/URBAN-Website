@@ -1,8 +1,7 @@
 <?php
   require("credentials.php");
 
-  function parseToXML($htmlStr)
-  {
+  function parseToXML($htmlStr) {
     $xmlStr=str_replace('<','&lt;',$htmlStr);
     $xmlStr=str_replace('>','&gt;',$xmlStr);
     $xmlStr=str_replace('"','&quot;',$xmlStr);
@@ -13,8 +12,7 @@
   
   // Opens a connection to a MySQL server
   $connection=mysqli_connect($host, $username, $password, $database);
-  if (!$connection) 
-  { 
+  if (!$connection) { 
     die('Not connected : ' . mysql_error());
   }
 
@@ -24,8 +22,7 @@
   GROUP BY Sites.SiteID;";
 
   $result = mysqli_query($connection , $query);
-  if (!$result) 
-  {
+  if (!$result) {
     die('Invalid query: ' . mysql_error());
   }
   
@@ -35,8 +32,7 @@
   echo '<markers>';
   
   // Iterate through the rows, printing XML nodes for each
-  while ($row = @mysqli_fetch_assoc($result))
-  {
+  while ($row = @mysqli_fetch_assoc($result)) {
     // Add to XML document node
     echo '<marker ';
     echo 'name="' . parseToXML($row['Stream']) . '" ';
@@ -52,9 +48,9 @@
   // End XML file
   echo '</markers>';
 
-    $data = array();
+  $data = array();
+  
   foreach ($result as $row) {
     $data[] = $row;
   }
-  console.log($data);
 ?>

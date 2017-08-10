@@ -1,10 +1,9 @@
-function displayChart() 
-{
-$(document).ready(function(){
+function displayChart() {
+$(document).ready(function() {
 	$.ajax({
 		url : "https://mcmastertreeid.ca/Urban/php/getChartData.php",
 		type : "GET",
-		success : function(data){
+		success : function(data) {
 
 			var siteID = [];
 			var chlorophyllData = [];

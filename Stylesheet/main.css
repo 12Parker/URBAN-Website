@@ -14,7 +14,7 @@ html, body {
   font-family: 'Merriweather', sans-serif;
   padding: 1em;
 }
-#header > h1{
+#header > h1 {
   width: 100%;
   height: 10%;
   margin: 0;
@@ -30,7 +30,6 @@ h1 {
   color: #a8a8a8;
   text-shadow: 1px 1px 0 white;
 }
-
 /* line 24, ../sass/main.scss */
 form  {
   max-width: 600px;
@@ -83,13 +82,11 @@ form #input-submit:hover{
 input:disabled {
     background: #dddddd;
 }
-
 #invalid-entry {
   border: 1px solid red;
 }
-
 a.button {
-   max-width: 600px;
+  max-width: 600px;
   text-align: center;
   margin: 20px auto;
   font-size: 14px;
@@ -98,7 +95,6 @@ a.button {
   color: white;
 
 }
-
 /* line 55, ../sass/main.scss */
 form textarea {
   height: 100px;
@@ -107,7 +103,6 @@ form textarea {
   margin: auto;
   width: 50%;
 }
-
 /* line 61, ../sass/main.scss */
 .half {
   display: inline-block;
@@ -116,20 +111,17 @@ form textarea {
   height: 40%;
   margin-bottom: 1em;
 }
-
 /* line 67, ../sass/main.scss */
 .right {
   height: 40%;
   float: right;
   width: 50%;
 }
-
 /* line 71, ../sass/main.scss */
 .left {
   height: 40%;
   margin-right: 2%;
 }
-
 #input-label {
   font-size: 12px;
 }
@@ -153,7 +145,6 @@ form textarea {
   top: 0px;
   right: 100%;
 }
-
 .tooltip:hover .tooltiptext {
   display: inline-block;
   visibility: visible;
